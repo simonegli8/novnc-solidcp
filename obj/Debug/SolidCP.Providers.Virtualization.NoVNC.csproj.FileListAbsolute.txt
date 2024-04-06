@@ -1,0 +1,6 @@
+C:\GitHub\SolidCP\SolidCP\Lib\novnc-solidcp\obj\Debug\SolidCP.Providers.Virtualization.NoVNC.csproj.AssemblyReference.cache
+C:\GitHub\SolidCP\SolidCP\Lib\novnc-solidcp\obj\Debug\SolidCP.Providers.Virtualization.NoVNC.csproj.CoreCompileInputs.cache
+C:\GitHub\SolidCP\SolidCP\Lib\novnc-solidcp\bin\SolidCP.Providers.Virtualization.NoVNC.dll
+C:\GitHub\SolidCP\SolidCP\Lib\novnc-solidcp\bin\SolidCP.Providers.Virtualization.NoVNC.pdb
+C:\GitHub\SolidCP\SolidCP\Lib\novnc-solidcp\obj\Debug\SolidCP.Providers.Virtualization.NoVNC.dll
+C:\GitHub\SolidCP\SolidCP\Lib\novnc-solidcp\obj\Debug\SolidCP.Providers.Virtualization.NoVNC.pdb
