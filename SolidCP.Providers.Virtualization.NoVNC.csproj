@@ -29,7 +29,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\$(Configuration)</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -43,7 +43,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>portable</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\$(Configuration)</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -93,6 +93,20 @@
   <ItemGroup>
     <Content Include="vnc.aspx" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Sources\SolidCP.EnterpriseServer.Base\SolidCP.EnterpriseServer.Base.csproj">
+      <Project>{c09ce910-f16b-48a1-b2cc-c99b8c1cf775}</Project>
+      <Name>SolidCP.EnterpriseServer.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sources\SolidCP.WebPortal\DesktopModules\SolidCP\SolidCP.Portal.Modules.csproj">
+      <Project>{12232731-5c45-4ed6-98f8-d47abe728280}</Project>
+      <Name>SolidCP.Portal.Modules</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sources\SolidCP.WebPortal\SolidCP.WebPortal.csproj">
+      <Project>{c99efb18-ffe7-45bb-8ca8-29336f3e8c68}</Project>
+      <Name>SolidCP.WebPortal</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -105,11 +119,15 @@
   <Target Name="AfterBuild" DependsOnTargets="CopyContentToPortal">
   </Target>
   <Target Name="CopyContentToPortal">
+    <ItemGroup>
+      <OutputFiles Include="bin\$(Configuration)\SolidCP.Providers.Virtualization.NoVNC.*" />
+    </ItemGroup>
     <MakeDir Directories="$(PortalDirectory)\novnc" Condition="!Exists('$(PortalDirectory)\novnc')" />
     <Copy SourceFiles="@(Content)" DestinationFiles="@(Content->'$(PortalDirectory)\novnc\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(AppContent)" DestinationFiles="@(AppContent->'$(PortalDirectory)\novnc\app\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(CoreContent)" DestinationFiles="@(CoreContent->'$(PortalDirectory)\novnc\core\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(VendorContent)" DestinationFiles="@(VendorContent->'$(PortalDirectory)\novnc\vendor\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(OutputFiles)" DestinationFolder="$(PortalDirectory)\bin" />
   </Target>
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
@@ -126,7 +144,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53153/</IISUrl>
+          <IISUrl>http://localhost:60343/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
