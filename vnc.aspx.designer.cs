@@ -15,12 +15,21 @@ namespace SolidCP.Providers.Virtualization.NoVNC
     {
 
         /// <summary>
-        /// frame control.
+        /// headHtml control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlIframe frame;
+        protected global::System.Web.UI.WebControls.Literal headHtml;
+
+        /// <summary>
+        /// bodyHtml control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal bodyHtml;
     }
 }

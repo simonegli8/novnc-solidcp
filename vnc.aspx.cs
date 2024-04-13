@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 using SolidCP.Providers;
 using SolidCP.Providers.OS;
 using SolidCP.Portal;
@@ -30,6 +31,8 @@ namespace SolidCP.Providers.Virtualization.NoVNC
                     PortalConfiguration.SiteSettings["LoginPage"] + "&ReturnUrl=" + Server.UrlEncode(returnUrl));
             }
 
+            var baseUrl = Regex.Match(Request.RawUrl, "^.*(?=/.*?.aspx)")?.Value;
+
             var item = Request.QueryString[ITEM_ID_PARAM];
             if (item != null)
             {
@@ -38,13 +41,23 @@ namespace SolidCP.Providers.Virtualization.NoVNC
                 if (vm != null) Page.Title = vm.Name;
                 else Page.Title = "noVNC";
 
-                var baseUrl = Regex.Match(Request.RawUrl, "^.*(?=/.*?.aspx)")?.Value;
                 var vncCredentials = Portal.ES.Services.Proxmox.GetPveVncCredentials(itemId);
                 if (vncCredentials != null) {
-                    string path = TunnelUri.QueryEncode($"{baseUrl}/websocket?user={TunnelUri.QueryEncode(PanelSecurity.LoggedUser.Username)}&item={itemId}&port={vncCredentials.Port}&ticket={HttpUtility.UrlEncode(vncCredentials.Ticket)}");
-                    var url = $"{baseUrl}/vnc.html?autoconnect=true&host={Request.Url.Host}&port={Request.Url.Port}&path={path}&password={HttpUtility.UrlEncode(vncCredentials.Ticket)}";
-                    frame.Src = url;
+                    string path = $"{baseUrl}/websocket?user={Uri.EscapeDataString(PanelSecurity.LoggedUser.Username)}&item={itemId}&vncpassword={Uri.EscapeDataString(vncCredentials.Password)}";
+                    var url = $"{baseUrl}/vnc.html?autoconnect=true&host={Request.Url.Host}&port={Request.Url.Port}&password={Uri.EscapeDataString(vncCredentials.Password)}&path={Uri.EscapeDataString(path)}";
+
+                    Response.Redirect(url);
                 }
+            } else
+            {
+                var htmlText = File.ReadAllText(Server.MapPath("~/novnc/vnc.html"));
+
+                var match = Regex.Match(htmlText, @"<head>(?<head>.*?)</head>.*?<body>(?<body>.*?)</body>", RegexOptions.IgnoreCase);
+                string head = match.Groups["head"].Value;
+                string body = match.Groups["body"].Value;
+                bodyHtml.Text = body;
+                head = Regex.Replace(head, "<title>.*?</title>", "", RegexOptions.IgnoreCase);
+                headHtml.Text = head;
             }
         }
     }
