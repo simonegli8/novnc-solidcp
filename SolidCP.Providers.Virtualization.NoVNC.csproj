@@ -93,6 +93,7 @@
     <VendorContent Include="vendor\**\*.*">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </VendorContent>
+    <Content Include="app\solidcp.js" />
     <Content Include="vnc.html">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -128,6 +129,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="package.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -154,88 +154,96 @@
                     <img alt="" src="app/images/settings.svg"> Settings
                 </div>
                 <ul>
-                    <li>
-                        <label><input id="noVNC_setting_shared" type="checkbox"> Shared Mode</label>
-                    </li>
-                    <li>
-                        <label><input id="noVNC_setting_view_only" type="checkbox"> View Only</label>
-                    </li>
-                    <li><hr></li>
-                    <li>
-                        <label><input id="noVNC_setting_view_clip" type="checkbox"> Clip to Window</label>
-                    </li>
-                    <li>
-                        <label for="noVNC_setting_resize">Scaling Mode:</label>
-                        <select id="noVNC_setting_resize" name="vncResize">
-                            <option value="off">None</option>
-                            <option value="scale">Local Scaling</option>
-                            <option value="remote">Remote Resizing</option>
-                        </select>
-                    </li>
-                    <li><hr></li>
-                    <li>
-                        <div class="noVNC_expander">Advanced</div>
-                        <div><ul>
+                   <li style="display:none;">
+                      <label><input id="noVNC_setting_shared" type="checkbox"> Shared Mode</label>
+                   </li>
+                   <li>
+                      <label><input id="noVNC_setting_view_only" type="checkbox"> View Only</label>
+                   </li>
+                   <li><hr></li>
+                   <li>
+                      <label><input id="noVNC_setting_view_clip" type="checkbox"> Clip to Window</label>
+                   </li>
+                   <li>
+                       <label><input id="noVNC_setting_autoresize" type="checkbox" /> Autoresize Window</label>
+                   </li>
+                   <li>
+                      <label for="noVNC_setting_resize">Scaling Mode:</label>
+                      <select id="noVNC_setting_resize" name="vncResize">
+                         <option value="off">Off</option>
+                         <option value="scale">Local Scaling</option>
+                         <!--<option value="remote">Remote Resizing</option>-->
+                      </select>
+                   </li>
+                   <li><hr></li>
+                   <li>
+                      <div class="noVNC_expander">Advanced</div>
+                      <div>
+                         <ul>
                             <li>
-                                <label for="noVNC_setting_quality">Quality:</label>
-                                <input id="noVNC_setting_quality" type="range" min="0" max="9" value="6">
+                               <label for="noVNC_setting_quality">Quality:</label>
+                               <input id="noVNC_setting_quality" type="range" min="0" max="9" value="6">
                             </li>
                             <li>
-                                <label for="noVNC_setting_compression">Compression level:</label>
-                                <input id="noVNC_setting_compression" type="range" min="0" max="9" value="2">
+                               <label for="noVNC_setting_compression">Compression level:</label>
+                               <input id="noVNC_setting_compression" type="range" min="0" max="9" value="2">
                             </li>
                             <li><hr></li>
                             <li>
-                                <label for="noVNC_setting_repeaterID">Repeater ID:</label>
-                                <input id="noVNC_setting_repeaterID" type="text" value="">
+                               <label for="noVNC_setting_repeaterID">Repeater ID:</label>
+                               <input id="noVNC_setting_repeaterID" type="text" value="">
                             </li>
                             <li>
-                                <div class="noVNC_expander">WebSocket</div>
-                                <div><ul>
-                                    <li>
+                               <div class="noVNC_expander">WebSocket</div>
+                               <div>
+                                  <ul>
+                                     <li>
                                         <label><input id="noVNC_setting_encrypt" type="checkbox"> Encrypt</label>
-                                    </li>
-                                    <li>
+                                     </li>
+                                     <li>
                                         <label for="noVNC_setting_host">Host:</label>
                                         <input id="noVNC_setting_host">
-                                    </li>
-                                    <li>
+                                     </li>
+                                     <li>
                                         <label for="noVNC_setting_port">Port:</label>
                                         <input id="noVNC_setting_port" type="number">
-                                    </li>
-                                    <li>
+                                     </li>
+                                     <li>
                                         <label for="noVNC_setting_path">Path:</label>
                                         <input id="noVNC_setting_path" type="text" value="websockify">
-                                    </li>
-                                </ul></div>
+                                     </li>
+                                  </ul>
+                               </div>
                             </li>
                             <li><hr></li>
                             <li>
-                                <label><input id="noVNC_setting_reconnect" type="checkbox"> Automatic Reconnect</label>
+                               <label><input id="noVNC_setting_reconnect" type="checkbox"> Automatic Reconnect</label>
                             </li>
                             <li>
-                                <label for="noVNC_setting_reconnect_delay">Reconnect Delay (ms):</label>
-                                <input id="noVNC_setting_reconnect_delay" type="number">
+                               <label for="noVNC_setting_reconnect_delay">Reconnect Delay (ms):</label>
+                               <input id="noVNC_setting_reconnect_delay" type="number">
                             </li>
                             <li><hr></li>
                             <li>
-                                <label><input id="noVNC_setting_show_dot" type="checkbox"> Show Dot when No Cursor</label>
+                               <label><input id="noVNC_setting_show_dot" type="checkbox"> Show Dot when No Cursor</label>
                             </li>
                             <li><hr></li>
                             <!-- Logging selection dropdown -->
                             <li>
-                                <label>Logging:
-                                    <select id="noVNC_setting_logging" name="vncLogging">
-                                    </select>
-                                </label>
+                               <label>
+                                  Logging:
+                                  <select id="noVNC_setting_logging" name="vncLogging">
+                                  </select>
+                               </label>
                             </li>
-                        </ul></div>
-                    </li>
-                    <li class="noVNC_version_separator"><hr></li>
-                    <li class="noVNC_version_wrapper">
-                        <span>Version:</span>
-                        <span class="noVNC_version"></span>
-                    </li>
+                         </ul>
+                      </div>
+                   </li>
+                   <li class="noVNC_version_separator"><hr></li>
+                   <li class="noVNC_version_wrapper">
+                      <span>Version:</span>
+                      <span class="noVNC_version"></span>
+                   </li>
                 </ul>
             </div>
             </div>

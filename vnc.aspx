@@ -1,13 +1,59 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="vnc.aspx.cs" Inherits="SolidCP.Providers.Virtualization.NoVNC.vnc"
-	EnableTheming = "False" StylesheetTheme="" Theme="" %>
+	EnableTheming="False" StylesheetTheme="" Theme="" %>
+
 <DOCTYPE html>
-<html>
-	<head runat="server">
-		<tile></tile>
-		<asp:Literal ID="headHtml" runat="server" />
-	</head>
-	<body style="border:0;margin:0;padding:0;">
-		<%!--<iframe ID="frame" runat="server" style="position: absolute; width: 100%; height: 100%; border: none; border:0;margin:0;padding:0;"/>--%>
-		<asp:Literal ID="bodyHtml" runat="server" />
-	</body>
+<html lang="en" class="noVNC_loading">
+<head runat="server">
+
+	<asp:Literal ID="headHtml" runat="server" />
+
+	<script type="module" crossorigin="anonymous" src="app/error-handler.js"></script>
+	<%--<script type="module" crossorigin="anonymous" src="app/ui.js"></script>--%>
+	<%--<script type="module" crossorigin="anonymous" src="app/solidcp.js"></script>--%>
+</head>
+<body style="border: 0; margin: 0; padding: 0;">
+
+	<asp:Literal ID="bodyHtml" runat="server" />
+
+	<form id="form1" runat="server" autocomplete="off"></form>
+
+	<script type="module">
+
+		import UI from "./app/ui.js";
+		import SCPUI from "./app/solidcp.js";
+
+		UI.disableSetting = function (name) {
+			const ctrl = document.getElementById('noVNC_setting_' + name);
+			ctrl.disabled = true;
+			ctrl.labels[0].classList.add('noVNC_disabled');
+		}
+
+		UI.enableSetting = function (name) {
+			const ctrl = document.getElementById('noVNC_setting_' + name);
+			ctrl.disabled = false;
+			ctrl.labels[0].classList.remove('noVNC_disabled');
+		}
+
+		UI.SCP = new SCPUI(UI);
+
+		UI.solidcp = function () {
+
+			UI.updateViewClip();
+
+			UI.forceSetting('path', <%= Path %>);
+			UI.forceSetting('port', <%= Port %>);
+			UI.forceSetting('host', <%= Host %>);
+
+			//UI.forceSetting('encrypt', true);
+			UI.forceSetting('autoresize', true);
+			UI.addSettingChangeHandler('autoresize');
+
+			UI.connect(null, <%= Password %>);
+		};
+
+		UI.setup();
+
+	</script>
+
+</body>
 </html>

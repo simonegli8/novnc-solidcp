@@ -2873,7 +2873,16 @@ export default class RFB extends EventTargetMixin {
         this._updateClip();
         this._updateScale();
 
-        this._updateContinuousUpdates();
+        // SolidCP: fbresize event
+        var event = new CustomEvent("fbresize", {
+          detail: {
+             rfb: this,
+             width: width,
+             height: height }
+        });
+        this.dispatchEvent(event);
+
+       this._updateContinuousUpdates();
 
         // Keep this size until browser client size changes
         this._saveExpectedClientSize();
