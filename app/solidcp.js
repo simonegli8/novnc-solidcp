@@ -437,5 +437,3 @@ SCPUI.prototype = {
 	},
 
 };
-
-UI.SCP = new SCPUI(UI);

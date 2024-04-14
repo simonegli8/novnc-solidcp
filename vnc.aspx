@@ -37,6 +37,8 @@
 			UI.connect(null, <%= Password %>);
 		};
 
+		UI.SCP = new SCPUI(UI);
+
 		UI.setup();
 
 	</script>

@@ -129,6 +129,7 @@ const UI = {
       } else {
          autoconnect = false;
          // Show the connect panel on first load unless autoconnecting
+         // SolidCP: don't show ConnectPanel
          //UI.openConnectPanel();
       }
 
