@@ -22,21 +22,7 @@
 		import UI from "./app/ui.js";
 		import SCPUI from "./app/solidcp.js";
 
-		UI.disableSetting = function (name) {
-			const ctrl = document.getElementById('noVNC_setting_' + name);
-			ctrl.disabled = true;
-			ctrl.labels[0].classList.add('noVNC_disabled');
-		}
-
-		UI.enableSetting = function (name) {
-			const ctrl = document.getElementById('noVNC_setting_' + name);
-			ctrl.disabled = false;
-			ctrl.labels[0].classList.remove('noVNC_disabled');
-		}
-
-		UI.SCP = new SCPUI(UI);
-
-		UI.solidcp = function () {
+		UI.setupSolidCP = function () {
 
 			UI.updateViewClip();
 

@@ -825,13 +825,21 @@ const UI = {
    disableSetting(name) {
       const ctrl = document.getElementById('noVNC_setting_' + name);
       ctrl.disabled = true;
-      ctrl.label.classList.add('noVNC_disabled');
+      if (typeof ctrl.label === 'undefined') {
+         ctrl.labels[0].classList.add('noVNC_disabled');
+      } else {
+         ctrl.label.classList.add('noVNC_disabled');
+      }
    },
 
    enableSetting(name) {
       const ctrl = document.getElementById('noVNC_setting_' + name);
       ctrl.disabled = false;
-      ctrl.label.classList.remove('noVNC_disabled');
+      if (typeof ctrl.label === 'undefined') {
+         ctrl.labels[0].classList.remove('noVNC_disabled');
+      } else {
+         ctrl.label.classList.remove('noVNC_disabled');
+      }
    },
 
    /* ------^-------
@@ -1788,7 +1796,7 @@ const UI = {
       l10n.setup(LINGUAS, "app/locale/")
          .catch(err => Log.Error("Failed to load translations: " + err))
          .then(UI.prime)
-         .then(UI.solidcp);
+         .then(UI.setupSolidCP);
    }
 };
 
