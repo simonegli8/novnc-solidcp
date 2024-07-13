@@ -2882,7 +2882,7 @@ export default class RFB extends EventTargetMixin {
         });
         this.dispatchEvent(event);
 
-       this._updateContinuousUpdates();
+        this._updateContinuousUpdates();
 
         // Keep this size until browser client size changes
         this._saveExpectedClientSize();
