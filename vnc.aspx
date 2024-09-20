@@ -24,6 +24,8 @@
 
 		UI.setupSolidCP = function () {
 
+            UI.closeConnectPanel();
+
 			UI.updateViewClip();
 
 			UI.forceSetting('path', <%= Path %>);
@@ -41,7 +43,8 @@
 
 		UI.setup();
 
-	</script>
+        UI.closeConnectPanel();
+    </script>
 
 </body>
 </html>
