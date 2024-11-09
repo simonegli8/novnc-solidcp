@@ -119,6 +119,10 @@
       <Project>{12232731-5c45-4ed6-98f8-d47abe728280}</Project>
       <Name>SolidCP.Portal.Modules</Name>
     </ProjectReference>
+        <ProjectReference Include="..\..\Sources\SolidCP.WebPortal\SolidCP.WebPortal.csproj">
+      <Project>{C99EFB18-FFE7-45BB-8CA8-29336F3E8C68}</Project>
+      <Name>SolidCP.WebPortal</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
