@@ -12,6 +12,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SolidCP.Providers.Virtualization.NoVNC</RootNamespace>
     <AssemblyName>SolidCP.Providers.Virtualization.NoVNC</AssemblyName>
+    <BaseIntermediateOutputPath>obj\$(Configuration)\net48\</BaseIntermediateOutputPath>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>4.0</OldToolsVersion>
@@ -36,7 +37,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\$(Configuration)</OutputPath>
+    <OutputPath>..\..\Sources\SolidCP.WebPortal\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -49,7 +50,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>portable</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\$(Configuration)</OutputPath>
+    <OutputPath>..\..\Sources\SolidCP.WebPortal\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
