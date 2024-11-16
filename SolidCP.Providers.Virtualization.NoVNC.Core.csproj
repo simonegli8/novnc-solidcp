@@ -8,8 +8,10 @@
     <PortalDirectory>..\..\Sources\SolidCP.WebPortal</PortalDirectory>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <RestoreSources>$(RestoreSources);../../Lib/WebFormsForCore/nupkg;https://api.nuget.org/v3/index.json</RestoreSources>
     <BaseIntermediateOutputPath>obj\$(Configuration)\$(TargetFramework)\</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionPath>$(BaseIntermediateOutputPath)</MSBuildProjectExtensionPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,7 +59,7 @@
     </Content>
 </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="EstrellasDeEsperanza.WebFormsForCore.Web" Version="1.1.2-beta" />
+    <PackageReference Include="EstrellasDeEsperanza.WebFormsForCore.Web" Version="1.2.0" />
     <ProjectReference Include="..\..\Sources\SolidCP.EnterpriseServer.Base\SolidCP.EnterpriseServer.Base.csproj">
       <Project>{c09ce910-f16b-48a1-b2cc-c99b8c1cf775}</Project>
       <Name>SolidCP.EnterpriseServer.Base</Name>
@@ -74,10 +76,7 @@
       <Project>{652639d5-59ce-4f42-8a5f-87cb1e812961}</Project>
       <Name>SolidCP.Web.Clients</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Sources\SolidCP.WebPortal\DesktopModules\SolidCP\SolidCP.Portal.Modules.csproj">
-      <Project>{12232731-5c45-4ed6-98f8-d47abe728280}</Project>
-      <Name>SolidCP.Portal.Modules</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\Sources\SolidCP.WebPortal\DesktopModules\SolidCP\SolidCP.Portal.Modules.Core.csproj" />
     <ProjectReference Include="..\..\Sources\SolidCP.WebPortal\SolidCP.WebPortal.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
