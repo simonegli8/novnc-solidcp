@@ -39,6 +39,7 @@
         <Reference Include="System.Configuration" />
         <Reference Include="System.EnterpriseServices" />
         <Reference Include="System.Xml.Linq" />
+        <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
     </ItemGroup>
 
     <ItemGroup>
