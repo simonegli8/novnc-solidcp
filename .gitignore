@@ -10,3 +10,9 @@ recordings
 *.swp
 *~
 noVNC-*.tgz
+.vs
+
+#build
+[Oo]bj/
+[Bb]in/
+*.user
