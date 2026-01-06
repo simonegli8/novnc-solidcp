@@ -5,14 +5,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
-using SolidCP.Providers;
-using SolidCP.Providers.OS;
-using SolidCP.Portal;
-using SolidCP.WebPortal;
+using FuseCP.Providers;
+using FuseCP.Providers.OS;
+using FuseCP.Portal;
+using FuseCP.WebPortal;
 using System.Text.RegularExpressions;
 
 
-namespace SolidCP.Providers.Virtualization.NoVNC
+namespace FuseCP.Providers.Virtualization.NoVNC
 {
     public partial class vnc : System.Web.UI.Page
     {

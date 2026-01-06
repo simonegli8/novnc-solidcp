@@ -10,8 +10,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SolidCP.Providers.Virtualization.NoVNC</RootNamespace>
-    <AssemblyName>SolidCP.Providers.Virtualization.NoVNC</AssemblyName>
+    <RootNamespace>FuseCP.Providers.Virtualization.NoVNC</RootNamespace>
+    <AssemblyName>FuseCP.Providers.Virtualization.NoVNC</AssemblyName>
     <BaseIntermediateOutputPath>obj\$(Configuration)\net48\</BaseIntermediateOutputPath>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -31,13 +31,13 @@
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup>
-    <PortalDirectory>..\..\Sources\SolidCP.WebPortal</PortalDirectory>
+    <PortalDirectory>..\..\Sources\FuseCP.WebPortal</PortalDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Sources\SolidCP.WebPortal\bin\</OutputPath>
+    <OutputPath>..\..\Sources\FuseCP.WebPortal\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -50,7 +50,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>portable</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\Sources\SolidCP.WebPortal\bin\</OutputPath>
+    <OutputPath>..\..\Sources\FuseCP.WebPortal\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -100,25 +100,25 @@
     <Content Include="vnc.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Sources\SolidCP.EnterpriseServer.Base\SolidCP.EnterpriseServer.Base.csproj">
+    <ProjectReference Include="..\..\Sources\FuseCP.EnterpriseServer.Base\FuseCP.EnterpriseServer.Base.csproj">
       <Project>{c09ce910-f16b-48a1-b2cc-c99b8c1cf775}</Project>
-      <Name>SolidCP.EnterpriseServer.Base</Name>
+      <Name>FuseCP.EnterpriseServer.Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Sources\SolidCP.EnterpriseServer\WebServices\SolidCP.Build\SolidCP.EnterpriseServer.Client.csproj">
+    <ProjectReference Include="..\..\Sources\FuseCP.EnterpriseServer\WebServices\FuseCP.Build\FuseCP.EnterpriseServer.Client.csproj">
       <Project>{df3d477e-741c-4871-b838-c1635e72474b}</Project>
-      <Name>SolidCP.EnterpriseServer.Client</Name>
+      <Name>FuseCP.EnterpriseServer.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Sources\SolidCP.Providers.Base\SolidCP.Providers.Base.csproj">
+    <ProjectReference Include="..\..\Sources\FuseCP.Providers.Base\FuseCP.Providers.Base.csproj">
       <Project>{684c932a-6c75-46ac-a327-f3689d89eb42}</Project>
-      <Name>SolidCP.Providers.Base</Name>
+      <Name>FuseCP.Providers.Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Sources\SolidCP.Web.Clients\SolidCP.Web.Clients.csproj">
+    <ProjectReference Include="..\..\Sources\FuseCP.Web.Clients\FuseCP.Web.Clients.csproj">
       <Project>{652639d5-59ce-4f42-8a5f-87cb1e812961}</Project>
-      <Name>SolidCP.Web.Clients</Name>
+      <Name>FuseCP.Web.Clients</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Sources\SolidCP.WebPortal\DesktopModules\SolidCP\SolidCP.Portal.Modules.csproj">
+    <ProjectReference Include="..\..\Sources\FuseCP.WebPortal\DesktopModules\FuseCP\FuseCP.Portal.Modules.csproj">
       <Project>{12232731-5c45-4ed6-98f8-d47abe728280}</Project>
-      <Name>SolidCP.Portal.Modules</Name>
+      <Name>FuseCP.Portal.Modules</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -140,7 +140,7 @@
   </Target>
   <Target Name="CopyContentToPortal">
     <ItemGroup>
-      <OutputFiles Include="bin\$(Configuration)\SolidCP.Providers.Virtualization.NoVNC.*" />
+      <OutputFiles Include="bin\$(Configuration)\FuseCP.Providers.Virtualization.NoVNC.*" />
     </ItemGroup>
     <MakeDir Directories="$(PortalDirectory)\novnc" Condition="!Exists('$(PortalDirectory)\novnc')" />
     <Copy SourceFiles="@(Content)" DestinationFiles="@(Content->'$(PortalDirectory)\novnc\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />

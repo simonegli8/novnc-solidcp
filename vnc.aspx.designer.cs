@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SolidCP.Providers.Virtualization.NoVNC {
+namespace FuseCP.Providers.Virtualization.NoVNC {
     
     
     public partial class vnc {

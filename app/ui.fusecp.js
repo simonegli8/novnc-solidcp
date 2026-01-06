@@ -129,7 +129,7 @@ const UI = {
         } else {
             autoconnect = false;
             // Show the connect panel on first load unless autoconnecting
-            // SolidCP: Don't open ConnectPanel
+            // FuseCP: Don't open ConnectPanel
             //UI.openConnectPanel();
         }
 
@@ -1064,7 +1064,7 @@ const UI = {
         UI.rfb.addEventListener("clipboard", UI.clipboardReceive);
         UI.rfb.addEventListener("bell", UI.bell);
         UI.rfb.addEventListener("desktopname", UI.updateDesktopName);
-        // SolidCP: Add fbresize event handler
+        // FuseCP: Add fbresize event handler
         UI.rfb.addEventListener("fbresize", UI.updateSessionSize);
         UI.rfb.clipViewport = UI.getSetting('view_clip');
         UI.rfb.scaleViewport = UI.getSetting('resize') === 'scale';
@@ -1772,7 +1772,7 @@ const UI = {
      */
 
     /* ------^-------
-     *    /SolidCP
+     *    /FuseCP
      * ==============
      */
 
@@ -1791,7 +1791,7 @@ const UI = {
         l10n.setup(LINGUAS);
         if (l10n.language === "en" || l10n.dictionary !== undefined) {
             UI.prime();
-            UI.setupSolidCP();
+            UI.setupFuseCP();
         } else {
             fetch('app/locale/' + l10n.language + '.json')
                 .then((response) => {
@@ -1803,7 +1803,7 @@ const UI = {
                 .then((translations) => { l10n.dictionary = translations; })
                 .catch(err => Log.Error("Failed to load translations: " + err))
                 .then(UI.prime)
-                .then(UI.setupSolidCP);
+                .then(UI.setupFuseCP);
         }
     }
 };

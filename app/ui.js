@@ -144,8 +144,8 @@ const UI = {
             //UI.openConnectPanel();
         }
 
-        // FuseCP setup SolidCP
-        UI.setupSolidCP();
+        // FuseCP setup FuseCP
+        UI.setupFuseCP();
     },
 
     initFullscreen() {
@@ -1875,7 +1875,7 @@ const UI = {
         l10n.setup(LINGUAS);
         if (l10n.language === "en" || l10n.dictionary !== undefined) {
             UI.prime();
-            UI.setupSolidCP();
+            UI.setupFuseCP();
         } else {
             fetch('app/locale/' + l10n.language + '.json')
                 .then((response) => {
@@ -1887,7 +1887,7 @@ const UI = {
                 .then((translations) => { l10n.dictionary = translations; })
                 .catch(err => Log.Error("Failed to load translations: " + err))
                 .then(UI.prime)
-                .then(UI.setupSolidCP);
+                .then(UI.setupFuseCP);
         }
     }
 };

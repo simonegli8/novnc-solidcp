@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="vnc.aspx.cs" Inherits="SolidCP.Providers.Virtualization.NoVNC.vnc"
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="vnc.aspx.cs" Inherits="FuseCP.Providers.Virtualization.NoVNC.vnc"
 	EnableTheming="False" StylesheetTheme="" Theme="" %>
 
 <DOCTYPE html>
@@ -9,7 +9,7 @@
 
 	<script type="module" crossorigin="anonymous" src="app/error-handler.js"></script>
 	<%--<script type="module" crossorigin="anonymous" src="app/ui.js"></script>--%>
-	<%--<script type="module" crossorigin="anonymous" src="app/solidcp.js"></script>--%>
+	<%--<script type="module" crossorigin="anonymous" src="app/FuseCP.js"></script>--%>
 </head>
 <body style="border: 0; margin: 0; padding: 0;">
 
@@ -20,9 +20,9 @@
 	<script type="module">
 
 		import UI from "./app/ui.js";
-		import SCPUI from "./app/solidcp.js";
+		import SCPUI from "./app/FuseCP.js";
 
-		UI.setupSolidCP = function () {
+		UI.setupFuseCP = function () {
 
             UI.closeConnectPanel();
 

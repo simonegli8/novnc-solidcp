@@ -1,7 +1,7 @@
 ﻿/*
-* SolidCP Utility functions for noVNC
-* Copyright (c) 2024, SolidCP
-* SolidCP is distributed under the Creative Commons Share-alike license
+* FuseCP Utility functions for noVNC
+* Copyright (c) 2024, FuseCP
+* FuseCP is distributed under the Creative Commons Share-alike license
 */
 
 import * as WebUtil from "./webutil.js";

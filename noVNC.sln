@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidCP.Providers.Virtualization.NoVNC", "SolidCP.Providers.Virtualization.NoVNC.csproj", "{1FEFD6D3-B584-4AF5-85EA-AA74DF9714A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuseCP.Providers.Virtualization.NoVNC", "FuseCP.Providers.Virtualization.NoVNC.csproj", "{1FEFD6D3-B584-4AF5-85EA-AA74DF9714A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
