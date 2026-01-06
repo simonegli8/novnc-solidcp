@@ -20,7 +20,7 @@
 	<script type="module">
 
 		import UI from "./app/ui.js";
-		import SCPUI from "./app/FuseCP.js";
+		import SCPUI from "./app/fusecp.js";
 
 		UI.setupFuseCP = function () {
 
