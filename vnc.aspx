@@ -41,7 +41,7 @@
 
 		UI.SCP = new SCPUI(UI);
 
-		UI.setup();
+		UI.start();
 
         UI.closeConnectPanel();
     </script>

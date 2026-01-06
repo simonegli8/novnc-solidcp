@@ -140,8 +140,12 @@ const UI = {
         } else {
             autoconnect = false;
             // Show the connect panel on first load unless autoconnecting
-            UI.openConnectPanel();
+            // FuseCP: Don't open ConnectPanel
+            //UI.openConnectPanel();
         }
+
+        // FuseCP setup SolidCP
+        UI.setupSolidCP();
     },
 
     initFullscreen() {
@@ -1095,7 +1099,9 @@ const UI = {
         UI.rfb.addEventListener("clipboard", UI.clipboardReceive);
         UI.rfb.addEventListener("bell", UI.bell);
         UI.rfb.addEventListener("desktopname", UI.updateDesktopName);
-        UI.rfb.clipViewport = UI.getSetting('view_clip');
+        // FuseCP: Add fbresize event handler
+        UI.rfb.addEventListener("fbresize", UI.updateSessionSize);
+         UI.rfb.clipViewport = UI.getSetting('view_clip');
         UI.rfb.scaleViewport = UI.getSetting('resize') === 'scale';
         UI.rfb.resizeSession = UI.getSetting('resize') === 'remote';
         UI.rfb.qualityLevel = parseInt(UI.getSetting('quality'));
@@ -1353,7 +1359,7 @@ const UI = {
         if (document.fullscreenElement || // alternative standard method
             document.mozFullScreenElement || // currently working methods
             document.webkitFullscreenElement ||
-            document.msFullscreenElement ) {
+            document.msFullscreenElement) {
             document.getElementById('noVNC_fullscreen_button')
                 .classList.add("noVNC_selected");
         } else {
@@ -1407,7 +1413,7 @@ const UI = {
         if (scaling) {
             // Can't be clipping if viewport is scaled to fit
             UI.forceSetting('view_clip', false);
-            UI.rfb.clipViewport  = false;
+            UI.rfb.clipViewport = false;
         } else if (brokenScrollbars) {
             UI.forceSetting('view_clip', true);
             UI.rfb.clipViewport = true;
@@ -1676,7 +1682,7 @@ const UI = {
         if (document.getElementById('noVNC_modifiers')
             .classList.contains("noVNC_open")) {
             UI.closeExtraKeys();
-        } else  {
+        } else {
             UI.openExtraKeys();
         }
     },
@@ -1849,6 +1855,41 @@ const UI = {
  *    /MISC
  * ==============
  */
+    /* ------^-------
+     *    /FuseCP
+     * ==============
+     */
+
+    updateSessionSize(e) {
+        var rfb = e.detail.rfb;
+        var width = e.detail.width;
+        var height = e.detail.height;
+        UI.SCP.updateFBSize(rfb, width, height);
+        UI.applyResizeMode();
+        UI.updateViewClip();
+    },
+
+    setup() {
+        // Set up translations
+        //const LINGUAS = ["cs", "de", "el", "es", "fr", "it", "ja", "ko", "nl", "pl", "pt_BR", "ru", "sv", "tr", "zh_CN", "zh_TW"];
+        l10n.setup(LINGUAS);
+        if (l10n.language === "en" || l10n.dictionary !== undefined) {
+            UI.prime();
+            UI.setupSolidCP();
+        } else {
+            fetch('app/locale/' + l10n.language + '.json')
+                .then((response) => {
+                    if (!response.ok) {
+                        throw Error("" + response.status + " " + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then((translations) => { l10n.dictionary = translations; })
+                .catch(err => Log.Error("Failed to load translations: " + err))
+                .then(UI.prime)
+                .then(UI.setupSolidCP);
+        }
+    }
 };
 
 export default UI;
