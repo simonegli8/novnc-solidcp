@@ -22,28 +22,23 @@
 		import UI from "./app/ui.js";
 		import SCPUI from "./app/fusecp.js";
 
-		UI.setupFuseCP = function () {
-
-            UI.closeConnectPanel();
-
-			UI.updateViewClip();
-
-			UI.forceSetting('path', <%= Path %>);
-			UI.forceSetting('port', <%= Port %>);
-			UI.forceSetting('host', <%= Host %>);
-
-			//UI.forceSetting('encrypt', true);
-			UI.forceSetting('autoresize', true);
-			UI.addSettingChangeHandler('autoresize');
-
-			UI.connect(null, <%= Password %>);
-		};
-
 		UI.SCP = new SCPUI(UI);
 
-		UI.start();
+        UI.start({
+            settings: {
+                defaults: {
+                    autoresize: true,
+                },
+                mandatory: {
+                    path: <%= Path %>,
+                    port: <%= Port %>,
+                    host: <%= Host %>,
+                    password: <%= Password %>,
+                    autoconnect: true
+                }
+            }
+        });
 
-        UI.closeConnectPanel();
     </script>
 
 </body>

@@ -228,6 +228,9 @@
                         </label>
                     </li>
                     <li>
+                        <label><input id="noVNC_setting_autoresize" type="checkbox" class="toggle" /> Autoresize Window</label>
+                    </li>
+                    <li>
                         <label for="noVNC_setting_resize">Scaling mode:</label>
                         <select id="noVNC_setting_resize" name="vncResize">
                             <option value="off">None</option>
@@ -238,73 +241,78 @@
                     <li><hr></li>
                     <li>
                         <div class="noVNC_expander">Advanced</div>
-                        <div><ul>
-                            <li>
-                                <label for="noVNC_setting_quality">Quality:</label>
-                                <input id="noVNC_setting_quality" type="range" min="0" max="9" value="6">
-                            </li>
-                            <li>
-                                <label for="noVNC_setting_compression">Compression level:</label>
-                                <input id="noVNC_setting_compression" type="range" min="0" max="9" value="2">
-                            </li>
-                            <li><hr></li>
-                            <li>
-                                <label for="noVNC_setting_repeaterID">Repeater ID:</label>
-                                <input id="noVNC_setting_repeaterID" type="text" value="">
-                            </li>
-                            <li>
-                                <div class="noVNC_expander">WebSocket</div>
-                                <div><ul>
-                                    <li>
-                                        <label>
-                                            <input id="noVNC_setting_encrypt" type="checkbox"
-                                                   class="toggle">
-                                            Encrypt
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label for="noVNC_setting_host">Host:</label>
-                                        <input id="noVNC_setting_host">
-                                    </li>
-                                    <li>
-                                        <label for="noVNC_setting_port">Port:</label>
-                                        <input id="noVNC_setting_port" type="number">
-                                    </li>
-                                    <li>
-                                        <label for="noVNC_setting_path">Path:</label>
-                                        <input id="noVNC_setting_path" type="text" value="websockify">
-                                    </li>
-                                </ul></div>
-                            </li>
-                            <li><hr></li>
-                            <li>
-                                <label>
-                                    <input id="noVNC_setting_reconnect" type="checkbox"
-                                           class="toggle">
-                                    Automatic reconnect
-                                </label>
-                            </li>
-                            <li>
-                                <label for="noVNC_setting_reconnect_delay">Reconnect delay (ms):</label>
-                                <input id="noVNC_setting_reconnect_delay" type="number">
-                            </li>
-                            <li><hr></li>
-                            <li>
-                                <label>
-                                    <input id="noVNC_setting_show_dot" type="checkbox"
-                                           class="toggle">
-                                    Show dot when no cursor
-                                </label>
-                            </li>
-                            <li><hr></li>
-                            <!-- Logging selection dropdown -->
-                            <li>
-                                <label>Logging:
-                                    <select id="noVNC_setting_logging" name="vncLogging">
-                                    </select>
-                                </label>
-                            </li>
-                        </ul></div>
+                        <div>
+                            <ul>
+                                <li>
+                                    <label for="noVNC_setting_quality">Quality:</label>
+                                    <input id="noVNC_setting_quality" type="range" min="0" max="9" value="6">
+                                </li>
+                                <li>
+                                    <label for="noVNC_setting_compression">Compression level:</label>
+                                    <input id="noVNC_setting_compression" type="range" min="0" max="9" value="2">
+                                </li>
+                                <li><hr></li>
+                                <li>
+                                    <label for="noVNC_setting_repeaterID">Repeater ID:</label>
+                                    <input id="noVNC_setting_repeaterID" type="text" value="">
+                                </li>
+                                <li>
+                                    <div class="noVNC_expander">WebSocket</div>
+                                    <div>
+                                        <ul>
+                                            <li>
+                                                <label>
+                                                    <input id="noVNC_setting_encrypt" type="checkbox"
+                                                           class="toggle">
+                                                    Encrypt
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label for="noVNC_setting_host">Host:</label>
+                                                <input id="noVNC_setting_host">
+                                            </li>
+                                            <li>
+                                                <label for="noVNC_setting_port">Port:</label>
+                                                <input id="noVNC_setting_port" type="number">
+                                            </li>
+                                            <li>
+                                                <label for="noVNC_setting_path">Path:</label>
+                                                <input id="noVNC_setting_path" type="text" value="websockify">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li><hr></li>
+                                <li>
+                                    <label>
+                                        <input id="noVNC_setting_reconnect" type="checkbox"
+                                               class="toggle">
+                                        Automatic reconnect
+                                    </label>
+                                </li>
+                                <li>
+                                    <label for="noVNC_setting_reconnect_delay">Reconnect delay (ms):</label>
+                                    <input id="noVNC_setting_reconnect_delay" type="number">
+                                </li>
+                                <li><hr></li>
+                                <li>
+                                    <label>
+                                        <input id="noVNC_setting_show_dot" type="checkbox"
+                                               class="toggle">
+                                        Show dot when no cursor
+                                    </label>
+                                </li>
+                                <li><hr></li>
+                                <!-- Logging selection dropdown -->
+                                <li>
+                                    <label>
+                                        Logging:
+                                        <select id="noVNC_setting_logging" name="vncLogging">
+                                        </select>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="noVNC_version_separator"><hr></li>
                     <li class="noVNC_version_wrapper">

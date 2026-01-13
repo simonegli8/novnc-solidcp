@@ -9,7 +9,7 @@
 import * as Log from '../core/util/logging.js';
 import _, { l10n } from './localization.js';
 import { isTouchDevice, isMac, isIOS, isAndroid, isChromeOS, isSafari,
-         hasScrollbarGutter, dragThreshold }
+         hasScrollbarGutter, dragThreshold, browserAsyncClipboardSupport }
     from '../core/util/browser.js';
 import { setCapture, getPointerEvent } from '../core/util/events.js';
 import KeyTable from "../core/input/keysym.js";
@@ -20,7 +20,7 @@ import * as WebUtil from "./webutil.js";
 
 const PAGE_TITLE = "noVNC";
 
-const LINGUAS = ["cs", "de", "el", "es", "fr", "it", "ja", "ko", "nl", "pl", "pt_BR", "ru", "sv", "tr", "zh_CN", "zh_TW"];
+const LINGUAS = ["cs", "de", "el", "es", "fr", "hr", "hu", "it", "ja", "ko", "nl", "pl", "pt_BR", "ru", "sv", "tr", "zh_CN", "zh_TW"];
 
 const UI = {
 
@@ -46,7 +46,7 @@ const UI = {
     reconnectCallback: null,
     reconnectPassword: null,
 
-    async start(options={}) {
+    async start(options = {}) {
         UI.customSettings = options.settings || {};
         if (UI.customSettings.defaults === undefined) {
             UI.customSettings.defaults = {};
@@ -140,6 +140,7 @@ const UI = {
         } else {
             autoconnect = false;
             // Show the connect panel on first load unless autoconnecting
+            // FuseCP: Don't open ConnectPanel
             //UI.openConnectPanel();
         }
     },
@@ -189,6 +190,8 @@ const UI = {
         UI.initSetting('repeaterID', '');
         UI.initSetting('reconnect', false);
         UI.initSetting('reconnect_delay', 5000);
+        // FuseCP: autoresize setting
+        UI.initSetting('autoresize', true);
     },
     // Adds a link to the label elements on the corresponding input elements
     setupSettingLabels() {
@@ -379,6 +382,8 @@ const UI = {
         UI.addSettingChangeHandler('logging', UI.updateLogging);
         UI.addSettingChangeHandler('reconnect');
         UI.addSettingChangeHandler('reconnect_delay');
+        // FuseCP: autoresize setting
+        UI.addSettingChangeHandler('autoresize');
     },
 
     addFullscreenHandlers() {
@@ -1095,6 +1100,8 @@ const UI = {
         UI.rfb.addEventListener("clipboard", UI.clipboardReceive);
         UI.rfb.addEventListener("bell", UI.bell);
         UI.rfb.addEventListener("desktopname", UI.updateDesktopName);
+        // FuseCP: Add fbresize event handler
+        UI.rfb.addEventListener("fbresize", UI.updateSessionSize);
         UI.rfb.clipViewport = UI.getSetting('view_clip');
         UI.rfb.scaleViewport = UI.getSetting('resize') === 'scale';
         UI.rfb.resizeSession = UI.getSetting('resize') === 'remote';
@@ -1103,6 +1110,7 @@ const UI = {
         UI.rfb.showDotCursor = UI.getSetting('show_dot');
 
         UI.updateViewOnly(); // requires UI.rfb
+        UI.updateClipboard();
     },
 
     disconnect() {
@@ -1154,6 +1162,8 @@ const UI = {
         UI.showStatus(msg);
         UI.updateVisualState('connected');
 
+        UI.updateBeforeUnload();
+
         // Do this last because it can only be used on rendered elements
         UI.rfb.focus();
     },
@@ -1190,6 +1200,8 @@ const UI = {
             UI.showStatus(_("Disconnected"), 'normal');
         }
 
+        UI.updateBeforeUnload();
+
         document.title = PAGE_TITLE;
 
         UI.openControlbar();
@@ -1208,6 +1220,24 @@ const UI = {
             msg = _("New connection has been rejected");
         }
         UI.showStatus(msg, 'error');
+    },
+
+    handleBeforeUnload(e) {
+        // Trigger a "Leave site?" warning prompt before closing the
+        // page. Modern browsers (Oct 2025) accept either (or both)
+        // preventDefault() or a nonempty returnValue, though the latter is
+        // considered legacy. The custom string is ignored by modern browsers,
+        // which display a native message, but older browsers will show it.
+        e.preventDefault();
+        e.returnValue = _("Are you sure you want to disconnect the session?");
+    },
+
+    updateBeforeUnload() {
+        // Remove first to avoid adding duplicates
+        window.removeEventListener("beforeunload", UI.handleBeforeUnload);
+        if (!UI.rfb?.viewOnly && UI.connected) {
+            window.addEventListener("beforeunload", UI.handleBeforeUnload);
+        }
     },
 
 /* ------^-------
@@ -1736,6 +1766,8 @@ const UI = {
         if (!UI.rfb) return;
         UI.rfb.viewOnly = UI.getSetting('view_only');
 
+        UI.updateBeforeUnload();
+
         // Hide input related buttons in view only mode
         if (UI.rfb.viewOnly) {
             document.getElementById('noVNC_keyboard_button')
@@ -1752,6 +1784,31 @@ const UI = {
             document.getElementById('noVNC_clipboard_button')
                 .classList.remove('noVNC_hidden');
         }
+    },
+
+    updateClipboard() {
+        browserAsyncClipboardSupport()
+            .then((support) => {
+                if (support === 'unsupported') {
+                    // Use fallback clipboard panel
+                    return;
+                }
+                if (support === 'denied' || support === 'available') {
+                    UI.closeClipboardPanel();
+                    document.getElementById('noVNC_clipboard_button')
+                        .classList.add('noVNC_hidden');
+                    document.getElementById('noVNC_clipboard_button')
+                        .removeEventListener('click', UI.toggleClipboardPanel);
+                    document.getElementById('noVNC_clipboard_text')
+                        .removeEventListener('change', UI.clipboardSend);
+                    if (UI.rfb) {
+                        UI.rfb.removeEventListener('clipboard', UI.clipboardReceive);
+                    }
+                }
+            })
+            .catch(() => {
+                // Treat as unsupported
+            });
     },
 
     updateShowDotCursor() {
@@ -1815,7 +1872,7 @@ const UI = {
     },
 
     setup() {
-        // Set up translations
+        /*// Set up translations
         const LINGUAS = ["cs", "de", "el", "es", "fr", "it", "ja", "ko", "nl", "pl", "pt_BR", "ru", "sv", "tr", "zh_CN", "zh_TW"];
         l10n.setup(LINGUAS);
         if (l10n.language === "en" || l10n.dictionary !== undefined) {
@@ -1833,7 +1890,10 @@ const UI = {
                 .catch(err => Log.Error("Failed to load translations: " + err))
                 .then(UI.prime)
                 .then(UI.setupFuseCP);
-        }
+        }*/
+
+        start();
+        UI.setupFuseCP();
     }
 };
 

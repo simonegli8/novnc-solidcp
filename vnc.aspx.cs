@@ -59,7 +59,7 @@ namespace FuseCP.Providers.Virtualization.NoVNC
                 var vncCredentials = Portal.ES.Services.Proxmox.GetPveVncCredentials(itemId);
                 if (vncCredentials != null)
                 {
-                    Path = EscapedJSString($"{baseUrl}/websocket?user={Uri.EscapeDataString(PanelSecurity.LoggedUser.Username)}&item={itemId}&vncpassword={Uri.EscapeDataString(vncCredentials.Password)}");
+                    Path = EscapedJSString($"/{baseUrl}/websocket?user={Uri.EscapeDataString(PanelSecurity.LoggedUser.Username)}&item={itemId}&vncpassword={Uri.EscapeDataString(vncCredentials.Password)}");
                     Password = EscapedJSString(vncCredentials.Password);
 
                     //var url = $"{baseUrl}/vnc.html?autoconnect=true&host={Request.Url.Host}&port={Request.Url.Port}&password={Uri.EscapeDataString(vncCredentials.Password)}&path={Uri.EscapeDataString(path)}";

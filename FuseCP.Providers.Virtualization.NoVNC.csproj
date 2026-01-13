@@ -55,6 +55,9 @@
         <VendorContent Include="vendor\**\*.*">
             <CopyToOutputDirectory>Never</CopyToOutputDirectory>
         </VendorContent>
+        <Compile Remove="Common\**" />
+        <EmbeddedResource Remove="Common\**" />
+        <None Remove="Common\**" />
         <Content Include="vnc.html">
             <CopyToOutputDirectory>Never</CopyToOutputDirectory>
         </Content>
@@ -82,9 +85,6 @@
         </ProjectReference>
         <ProjectReference Include="..\..\Sources\FuseCP.WebPortal\DesktopModules\FuseCP\FuseCP.Portal.Modules.csproj" />
         <ProjectReference Include="..\..\Sources\FuseCP.WebPortal\FuseCP.WebPortal.csproj" />
-    </ItemGroup>
-    <ItemGroup>
-        <Folder Include="Common\" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="package.json" />
